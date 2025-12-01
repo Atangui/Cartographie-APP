@@ -10,7 +10,7 @@ Une application web moderne permettant de dessiner des zones g√©ographiques, cr√
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?logo=leaflet)](https://leafletjs.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-!<img width="1915" height="878" alt="image" src="https://github.com/user-attachments/assets/e6a94901-4bae-4cd5-95f5-edb4c3cf270e" />
+<img width="1915" height="878" alt="image" src="https://github.com/user-attachments/assets/e6a94901-4bae-4cd5-95f5-edb4c3cf270e" />
 
 
 ---
