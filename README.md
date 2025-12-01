@@ -10,30 +10,8 @@ Une application web moderne permettant de dessiner des zones géographiques, cr�
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?logo=leaflet)](https://leafletjs.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-<<<<<<< HEAD
-## 🚀 Démo
-
-**Note :** Ce projet nécessite un backend Django pour fonctionner. Pour une démo complète, suivez les instructions d'installation ci-dessous.
-
-### Démo locale rapide
-```bash
-# Terminal 1 - Backend
-cd backend && .\venv\Scripts\Activate.ps1 && python manage.py runserver
-
-# Terminal 2 - Frontend  
-cd frontend && npm run dev
-```
-Ouvrez http://localhost:5173 pour voir l'application en action !
-
-### 📸 Aperçu
-
-![Application Screenshot](docs/demo-screenshot.png)
-
-*Interface principale : carte interactive, zones géographiques, événements et système d'alertes*
-=======
 <img width="1915" height="878" alt="image" src="https://github.com/user-attachments/assets/e6a94901-4bae-4cd5-95f5-edb4c3cf270e" />
 
->>>>>>> 6adbba87e3d1b7813246556c011c5b1388b070a9
 
 ---
 
