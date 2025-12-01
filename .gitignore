@@ -78,3 +78,6 @@ thumbs.db
 # Private documentation (ne pas publier sur GitHub)
 TECHNICAL_GUIDE.md
 TESTS_END_TO_END.md
+VALIDATION_CHECKLIST.md
+GITHUB_PUBLISHING_GUIDE.md
+publish-to-github.ps1
