@@ -10,7 +10,8 @@ Une application web moderne permettant de dessiner des zones géographiques, cr�
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?logo=leaflet)](https://leafletjs.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-![Demo](docs/demo-screenshot.png)
+!<img width="1915" height="878" alt="image" src="https://github.com/user-attachments/assets/e6a94901-4bae-4cd5-95f5-edb4c3cf270e" />
+
 
 ---
 
@@ -279,16 +280,16 @@ Ce projet démontre :
 - ✅ Orchestration d'outils d'IA pour accélérer le développement
 - ✅ Capacité à expliquer et documenter des concepts techniques
 
-💡 **Note :** Ce projet a été développé en utilisant GitHub Copilot et Claude (Anthropic) comme assistants de développement, sous ma supervision technique et architecturale complète.
+💡 **Note :** Ce projet a été développé en co-utilisant l'IA comme assistants de développement, sous ma supervision technique et architecturale complète.
 
 ---
 
 ## 📫 Contact
 
 Pour toute question ou opportunité professionnelle :
-- GitHub : [votre-username]
-- LinkedIn : [votre-profil]
-- Email : [votre-email]
+- GitHub : Atangui
+- LinkedIn : https://www.linkedin.com/in/charlesatangui/
+- Email : atanguicharles[at]gmail[dot]com
 
 ---
 
