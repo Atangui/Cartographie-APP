@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python manage.py migrate --noinput && python manage.py init_event_types && python manage.py init_demo_data && gunicorn geoapp.wsgi --log-file -",
+    "startCommand": "/app/.venv/bin/python manage.py migrate --noinput && /app/.venv/bin/python manage.py init_event_types && /app/.venv/bin/python manage.py init_demo_data && /app/.venv/bin/gunicorn geoapp.wsgi --log-file -",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
