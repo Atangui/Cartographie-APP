@@ -59,33 +59,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'geoapp.wsgi.application'
 
 # Database - PostgreSQL for production
-# Parse DATABASE_URL with proper encoding
-database_url = os.environ.get('DATABASE_URL', '')
-if database_url:
-    # Force UTF-8 encoding for the connection string
-    import urllib.parse
-    parsed = urllib.parse.urlparse(database_url)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': parsed.path.lstrip('/'),
-            'USER': parsed.username,
-            'PASSWORD': urllib.parse.unquote(parsed.password) if parsed.password else '',
-            'HOST': parsed.hostname,
-            'PORT': parsed.port or 5432,
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'railway'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'postgres.railway.internal'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'geoapp',
-            'USER': 'postgres',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
