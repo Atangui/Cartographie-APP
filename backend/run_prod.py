@@ -43,6 +43,8 @@ def main():
     print("Applying migrations...")
     # Force makemigrations first to be absolutely sure
     run_command(f"{python_exe} manage.py makemigrations geospatial", exit_on_error=False)
+    # Force migrate zero to reset everything if needed
+    # run_command(f"{python_exe} manage.py migrate geospatial zero", exit_on_error=False)
     run_command(f"{python_exe} manage.py migrate --noinput", exit_on_error=True)
     
     # Run init scripts
