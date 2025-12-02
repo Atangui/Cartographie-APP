@@ -37,6 +37,8 @@ def main():
     
     # Run migrations - FAIL HARD IF THIS FAILS
     print("Applying migrations...")
+    # Force makemigrations first to be absolutely sure
+    run_command(f"{python_exe} manage.py makemigrations geospatial", exit_on_error=False)
     run_command(f"{python_exe} manage.py migrate --noinput", exit_on_error=True)
     
     # Run init scripts
