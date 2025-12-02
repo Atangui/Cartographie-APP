@@ -1,9 +1,35 @@
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from shapely.geometry import Point, shape
+from django.core.management import call_command
 from .models import GeoZone, EventType, GeoEvent, Alert
 from .serializers import GeoZoneSerializer, EventTypeSerializer, GeoEventSerializer, AlertSerializer
+
+
+@api_view(['POST'])
+def initialize_database(request):
+    """Initialize database with demo data - ONE TIME USE"""
+    try:
+        # Run init commands
+        call_command('init_event_types')
+        call_command('init_demo_data')
+        
+        return Response({
+            'status': 'success',
+            'message': 'Database initialized with demo data',
+            'data': {
+                'event_types': EventType.objects.count(),
+                'zones': GeoZone.objects.count(),
+                'events': GeoEvent.objects.count(),
+                'alerts': Alert.objects.count()
+            }
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({
+            'status': 'error',
+            'message': str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class GeoZoneViewSet(viewsets.ModelViewSet):
