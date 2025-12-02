@@ -35,17 +35,15 @@ def main():
     # Debug: Show migrations status
     run_command(f"{python_exe} manage.py showmigrations", exit_on_error=False)
     
-    # AUTO-REPAIR: Check for desynchronized DB state
-    print("Running DB auto-repair check...")
-    run_command(f"{python_exe} fix_db.py", exit_on_error=False)
-
-    # Run migrations - FAIL HARD IF THIS FAILS
-    print("Applying migrations...")
-    # Force makemigrations first to be absolutely sure
-    run_command(f"{python_exe} manage.py makemigrations geospatial", exit_on_error=False)
-    # Force migrate zero to reset everything if needed
-    # run_command(f"{python_exe} manage.py migrate geospatial zero", exit_on_error=False)
-    run_command(f"{python_exe} manage.py migrate --noinput", exit_on_error=True)
+    # NUCLEAR OPTION: Drop everything if migration fails
+    print("Attempting standard migration...")
+    try:
+        run_command(f"{python_exe} manage.py migrate --noinput", exit_on_error=True)
+    except SystemExit:
+        print("❌ Migration failed. Initiating NUCLEAR RESET protocol...")
+        run_command(f"{python_exe} nuke_db.py", exit_on_error=False)
+        print("♻️  Database wiped. Re-applying migrations from scratch...")
+        run_command(f"{python_exe} manage.py migrate --noinput", exit_on_error=True)
     
     # Run init scripts
     run_command(f"{python_exe} manage.py init_event_types", exit_on_error=False)
