@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import connection
 from django.core.management import call_command
+import time
 
 class Command(BaseCommand):
     help = 'Hard reset of the database'
@@ -23,11 +24,21 @@ class Command(BaseCommand):
 
         # Migrate
         self.stdout.write('Applying migrations...')
+        # Force makemigrations to ensure we have migrations to apply
+        try:
+            call_command('makemigrations', 'geospatial', interactive=False)
+        except Exception as e:
+            self.stdout.write(self.style.ERROR(f'Error making migrations: {e}'))
+
         call_command('migrate', interactive=False)
         
         # Init data
         self.stdout.write('Initializing data...')
-        call_command('init_event_types')
-        call_command('init_demo_data')
+        try:
+            call_command('init_event_types')
+            call_command('init_demo_data')
+        except Exception as e:
+             self.stdout.write(self.style.ERROR(f'Error initializing data: {e}'))
         
         self.stdout.write(self.style.SUCCESS('✅ Hard reset complete.'))
+
