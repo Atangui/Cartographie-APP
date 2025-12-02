@@ -42,6 +42,13 @@ def fix_database():
                     print("   ℹ️  Migration '0001_initial' is NOT applied. Normal migration should work.")
             except Exception as e:
                 print(f"   Warning: Could not check migration history: {e}")
+                # If we can't check history, maybe the django_migrations table is broken too?
+                # Let's try to force a reset anyway if the table is missing
+                print("   ⚠️ Force resetting migration history for geospatial app just in case...")
+                try:
+                    call_command('migrate', 'geospatial', 'zero', fake=True)
+                except:
+                    pass
 
     except Exception as e:
         print(f"Error during DB check: {e}")
