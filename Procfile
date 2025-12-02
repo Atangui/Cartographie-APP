@@ -1,1 +1,1 @@
-web: cd backend && /app/.venv/bin/python manage.py migrate && /app/.venv/bin/python manage.py init_event_types && /app/.venv/bin/python manage.py init_demo_data && /app/.venv/bin/gunicorn geoapp.wsgi --log-file -
+web: /app/.venv/bin/python backend/run_prod.py
