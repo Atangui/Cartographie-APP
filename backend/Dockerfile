@@ -6,20 +6,19 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     gcc \
     postgresql-client \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
+# Copy requirements and install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application
+# Copy entire application
 COPY . .
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
 # Run migrations and start server
-CMD python manage.py migrate && \
+CMD python manage.py migrate --noinput && \
     python manage.py init_event_types && \
     python manage.py init_demo_data && \
-    gunicorn geoapp.wsgi --bind 0.0.0.0:$PORT --log-file -
+    python manage.py collectstatic --noinput && \
+    gunicorn geoapp.wsgi --bind 0.0.0.0:$PORT --log-file - --access-logfile -
