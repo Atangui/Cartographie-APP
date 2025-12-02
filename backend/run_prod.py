@@ -2,16 +2,17 @@ import os
 import subprocess
 import sys
 
-def run_command(command):
+def run_command(command, exit_on_error=True):
     print(f"Running: {command}")
     try:
         subprocess.check_call(command, shell=True)
     except subprocess.CalledProcessError as e:
         print(f"Error running command: {command}")
-        # We don't exit here because we want to try to start the server anyway
-        # But for migrations it's critical.
-        if "migrate" in command:
-             print("Migration failed, but attempting to continue...")
+        if exit_on_error:
+            print("CRITICAL ERROR: Command failed. Exiting.")
+            sys.exit(1)
+        else:
+            print("Warning: Command failed but continuing...")
 
 def main():
     # Change to the directory of the script (backend/)
@@ -21,13 +22,26 @@ def main():
     
     python_exe = sys.executable
     print(f"Python executable: {python_exe}")
+
+    # Debug: List migration files
+    print("Checking migration files:")
+    migrations_dir = os.path.join(script_dir, 'geospatial', 'migrations')
+    if os.path.exists(migrations_dir):
+        for f in os.listdir(migrations_dir):
+            print(f" - {f}")
+    else:
+        print(f"WARNING: Migrations directory not found at {migrations_dir}")
+
+    # Debug: Show migrations status
+    run_command(f"{python_exe} manage.py showmigrations", exit_on_error=False)
     
-    # Run migrations
-    run_command(f"{python_exe} manage.py migrate --noinput")
+    # Run migrations - FAIL HARD IF THIS FAILS
+    print("Applying migrations...")
+    run_command(f"{python_exe} manage.py migrate --noinput", exit_on_error=True)
     
     # Run init scripts
-    run_command(f"{python_exe} manage.py init_event_types")
-    run_command(f"{python_exe} manage.py init_demo_data")
+    run_command(f"{python_exe} manage.py init_event_types", exit_on_error=False)
+    run_command(f"{python_exe} manage.py init_demo_data", exit_on_error=False)
     
     # Start Gunicorn
     print("Starting Gunicorn...")
