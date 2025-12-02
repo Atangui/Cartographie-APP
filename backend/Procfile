@@ -1,2 +1,1 @@
-release: python manage.py migrate && python manage.py init_event_types && python manage.py init_demo_data
-web: gunicorn geoapp.wsgi --log-file -
+web: bash start.sh
