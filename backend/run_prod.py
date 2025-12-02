@@ -35,6 +35,10 @@ def main():
     # Debug: Show migrations status
     run_command(f"{python_exe} manage.py showmigrations", exit_on_error=False)
     
+    # AUTO-REPAIR: Check for desynchronized DB state
+    print("Running DB auto-repair check...")
+    run_command(f"{python_exe} fix_db.py", exit_on_error=False)
+
     # Run migrations - FAIL HARD IF THIS FAILS
     print("Applying migrations...")
     # Force makemigrations first to be absolutely sure
