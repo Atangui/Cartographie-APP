@@ -1,1 +1,1 @@
-web: /app/.venv/bin/python backend/run_prod.py
+web: cd backend && /app/.venv/bin/python manage.py hard_reset && /app/.venv/bin/gunicorn geoapp.wsgi --log-file -
